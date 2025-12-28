@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config' ;
 import { MongodbModule } from './database/mongodb/mongodb.module';
 import { PostgresqlModule } from './database/postgresql/postgresql.module';
 import { mongoConfig, postgresConfig } from './config/database.config';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { mongoConfig, postgresConfig } from './config/database.config';
     }),
     MongodbModule,
     PostgresqlModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
