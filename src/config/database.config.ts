@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config'
 
 export const mongoConfig = registerAs('mongo', () => ({
-    uri: process.env.MONGO_URI,
+    uri: process.env.MONGODB_URI,
 }));
 
 export const postgresConfig = registerAs('postgres', () => ({
