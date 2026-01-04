@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config' ; 
+import { ConfigModule } from '@nestjs/config';
 import { MongodbModule } from './database/mongodb/mongodb.module';
 import { PostgresqlModule } from './database/postgresql/postgresql.module';
 import { mongoConfig, postgresConfig } from './config/database.config';
@@ -23,4 +23,4 @@ import { UsersModule } from './users/users.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
