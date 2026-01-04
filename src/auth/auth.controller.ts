@@ -1,5 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { UserRole } from '../users/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -10,8 +11,9 @@ export class AuthController {
         @Body('email') email: string,
         @Body('password') password: string,
         @Body('name') name: string,
+        @Body('role') role?: UserRole,
     ) {
-        return this.authService.register(email, password, name);
+        return this.authService.register(email, password, name, role);
     }
 
     @Post('login')
