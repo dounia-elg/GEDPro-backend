@@ -72,8 +72,20 @@ export class FormsService {
         description: 'Standard job application form',
         isTemplate: true,
         fields: [
-          { id: '1', label: 'Full Name', type: 'text', required: true, form: null },
-          { id: '2', label: 'Email', type: 'email', required: true, form: null },
+          {
+            id: '1',
+            label: 'Full Name',
+            type: 'text',
+            required: true,
+            form: null,
+          },
+          {
+            id: '2',
+            label: 'Email',
+            type: 'email',
+            required: true,
+            form: null,
+          },
           { id: '3', label: 'CV', type: 'file', required: true, form: null },
         ],
       },
@@ -82,8 +94,20 @@ export class FormsService {
         description: 'Employee onboarding form',
         isTemplate: true,
         fields: [
-          { id: '4', label: 'Start Date', type: 'date', required: true, form: null },
-          { id: '5', label: 'Position', type: 'text', required: true, form: null },
+          {
+            id: '4',
+            label: 'Start Date',
+            type: 'date',
+            required: true,
+            form: null,
+          },
+          {
+            id: '5',
+            label: 'Position',
+            type: 'text',
+            required: true,
+            form: null,
+          },
         ],
       },
     ];
@@ -98,5 +122,12 @@ export class FormsService {
         await this.formRepository.save(form);
       }
     }
+  }
+
+  getTemplates() {
+    return this.formRepository.find({
+      where: { isTemplate: true },
+      relations: ['fields'],
+    });
   }
 }
