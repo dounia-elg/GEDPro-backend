@@ -48,4 +48,14 @@ export class FormsController {
       formId,
     });
   }
+
+  @Get('templates')
+  getTemplates() {
+    return this.formsService.getTemplates();
+  }
+
+  @Post('templates/:id/clone')
+  clone(@Param('id') id: string) {
+    return this.formsService.cloneTemplate(id);
+  }
 }

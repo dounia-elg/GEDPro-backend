@@ -64,4 +64,94 @@ export class FormsService {
 
     return this.responseRepository.save(response);
   }
+
+  async createDefaultTemplates() {
+    const templates = [
+      {
+        title: 'Job Application Template',
+        description: 'Standard job application form',
+        isTemplate: true,
+        fields: [
+          {
+            id: '1',
+            label: 'Full Name',
+            type: 'text',
+            required: true,
+            form: null,
+          },
+          {
+            id: '2',
+            label: 'Email',
+            type: 'email',
+            required: true,
+            form: null,
+          },
+          { id: '3', label: 'CV', type: 'file', required: true, form: null },
+        ],
+      },
+      {
+        title: 'Onboarding Template',
+        description: 'Employee onboarding form',
+        isTemplate: true,
+        fields: [
+          {
+            id: '4',
+            label: 'Start Date',
+            type: 'date',
+            required: true,
+            form: null,
+          },
+          {
+            id: '5',
+            label: 'Position',
+            type: 'text',
+            required: true,
+            form: null,
+          },
+        ],
+      },
+    ];
+
+    for (const template of templates) {
+      const exists = await this.formRepository.findOne({
+        where: { title: template.title, isTemplate: true },
+      });
+
+      if (!exists) {
+        const form = this.formRepository.create(template);
+        await this.formRepository.save(form);
+      }
+    }
+  }
+
+  getTemplates() {
+    return this.formRepository.find({
+      where: { isTemplate: true },
+      relations: ['fields'],
+    });
+  }
+
+  async cloneTemplate(templateId: string) {
+    const template = await this.formRepository.findOne({
+      where: { id: templateId, isTemplate: true },
+      relations: ['fields'],
+    });
+
+    if (!template) {
+      throw new NotFoundException('Template not found');
+    }
+
+    const newForm = this.formRepository.create({
+      title: template.title + ' (Copy)',
+      description: template.description,
+      isTemplate: false,
+      fields: template.fields.map((field) => ({
+        label: field.label,
+        type: field.type,
+        required: field.required,
+      })),
+    });
+
+    return this.formRepository.save(newForm);
+  }
 }
