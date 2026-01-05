@@ -4,12 +4,17 @@ import { Repository } from 'typeorm';
 import { Form } from './entities/form.entity';
 import { CreateFormDto } from './dto/create-form.dto';
 import { UpdateFormDto } from './dto/update-form.dto';
+import { FormResponse } from './entities/form-response.entity';
+import { CreateFormResponseDto } from './dto/create-form-response.dto';
 
 @Injectable()
 export class FormsService {
   constructor(
     @InjectRepository(Form)
     private formRepository: Repository<Form>,
+
+    @InjectRepository(FormResponse)
+    private responseRepository: Repository<FormResponse>,
   ) {}
 
   async create(dto: CreateFormDto): Promise<Form> {
@@ -40,5 +45,23 @@ export class FormsService {
   async remove(id: string): Promise<void> {
     const form = await this.findOne(id);
     await this.formRepository.remove(form);
+  }
+
+  async submitResponse(dto: CreateFormResponseDto) {
+    const form = await this.formRepository.findOne({
+      where: { id: dto.formId },
+    });
+
+    if (!form) {
+      throw new NotFoundException('Form not found');
+    }
+
+    const response = this.responseRepository.create({
+      form,
+      answers: dto.answers,
+      candidateId: dto.candidateId,
+    });
+
+    return this.responseRepository.save(response);
   }
 }
