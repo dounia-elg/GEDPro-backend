@@ -48,4 +48,9 @@ export class FormsController {
       formId,
     });
   }
+
+  @Get('templates')
+  getTemplates() {
+    return this.formsService.getTemplates();
+  }
 }
