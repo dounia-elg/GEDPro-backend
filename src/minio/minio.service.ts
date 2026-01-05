@@ -21,7 +21,7 @@ export class MinioService {
     fileBuffer: Buffer,
     mimeType: string,
   ) {
-    await this.minioClient.putObject(bucket, fileName, fileBuffer, fileBuffer.length, mimeType);
+    await this.minioClient.putObject(bucket, fileName, fileBuffer, fileBuffer.length, { 'Content-Type': mimeType });
 
     return fileName;
   }
