@@ -130,4 +130,28 @@ export class FormsService {
       relations: ['fields'],
     });
   }
+
+  async cloneTemplate(templateId: string) {
+    const template = await this.formRepository.findOne({
+      where: { id: templateId, isTemplate: true },
+      relations: ['fields'],
+    });
+
+    if (!template) {
+      throw new NotFoundException('Template not found');
+    }
+
+    const newForm = this.formRepository.create({
+      title: template.title + ' (Copy)',
+      description: template.description,
+      isTemplate: false,
+      fields: template.fields.map((field) => ({
+        label: field.label,
+        type: field.type,
+        required: field.required,
+      })),
+    });
+
+    return this.formRepository.save(newForm);
+  }
 }
