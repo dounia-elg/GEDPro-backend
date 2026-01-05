@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  CreateDateColumn,
+} from 'typeorm';
 import { FormField } from './form-field.entity';
 
 @Entity()
@@ -12,10 +18,13 @@ export class Form {
   @Column({ nullable: true })
   description: string;
 
-  @OneToMany(() => FormField, field => field.form, {
+  @OneToMany(() => FormField, (field) => field.form, {
     cascade: true,
   })
   fields: FormField[];
+
+  @Column({ default: false })
+  isTemplate: boolean;
 
   @CreateDateColumn()
   createdAt: Date;
