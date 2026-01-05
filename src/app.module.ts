@@ -8,6 +8,7 @@ import { mongoConfig, postgresConfig } from './config/database.config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { FormsModule } from './forms/forms.module';
+import { UploadsModule } from './uploads/uploads.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { FormsModule } from './forms/forms.module';
     AuthModule,
     UsersModule,
     FormsModule,
+    UploadsModule,
   ],
   controllers: [],
   providers: [],
