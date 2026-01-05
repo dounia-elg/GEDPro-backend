@@ -7,6 +7,7 @@ import { PostgresqlModule } from './database/postgresql/postgresql.module';
 import { mongoConfig, postgresConfig } from './config/database.config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { FormsModule } from './forms/forms.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UsersModule } from './users/users.module';
     PostgresqlModule,
     AuthModule,
     UsersModule,
+    FormsModule,
   ],
   controllers: [],
   providers: [],
