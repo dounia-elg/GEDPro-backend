@@ -1,0 +1,16 @@
+export const SKILLS_DICTIONARY = [
+  'javascript',
+  'typescript',
+  'nestjs',
+  'nodejs',
+  'react',
+  'angular',
+  'vue',
+  'docker',
+  'postgresql',
+  'mongodb',
+  'mysql',
+  'git',
+  'linux',
+  'aws',
+];
