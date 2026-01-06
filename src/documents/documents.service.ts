@@ -13,10 +13,10 @@ export class DocumentsService {
 
     @InjectRepository(Candidate)
     private candidatesRepository: Repository<Candidate>,
-  ) {}
+  ) { }
 
   async uploadDocument(
-    candidateId: number,
+    candidateId: string,
     filename: string,
     path: string,
     category: DocumentCategory,
@@ -45,7 +45,7 @@ export class DocumentsService {
     });
   }
 
-  async findByCandidate(candidateId: number): Promise<Document[]> {
+  async findByCandidate(candidateId: string): Promise<Document[]> {
     return this.documentsRepository.find({
       where: { candidate: { id: candidateId } },
       relations: ['candidate'],
@@ -60,7 +60,7 @@ export class DocumentsService {
   }
 
   async findByCandidateAndCategory(
-    candidateId: number,
+    candidateId: string,
     category: DocumentCategory,
   ): Promise<Document[]> {
     return this.documentsRepository.find({
