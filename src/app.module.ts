@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { FormsModule } from './forms/forms.module';
 import { UploadsModule } from './uploads/uploads.module';
+import { CandidatesModule } from './candidates/candidates.module';
 
 
 @Module({
@@ -24,6 +25,7 @@ import { UploadsModule } from './uploads/uploads.module';
     UsersModule,
     FormsModule,
     UploadsModule,
+    CandidatesModule,
   ],
   controllers: [],
   providers: [],
