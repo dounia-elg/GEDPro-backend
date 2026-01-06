@@ -1,0 +1,7 @@
+export enum DocumentCategory {
+  CV = 'CV',
+  COVER_LETTER = 'COVER_LETTER',
+  CONTRACT = 'CONTRACT',
+  CERTIFICATE = 'CERTIFICATE',
+  EVALUATION = 'EVALUATION',
+}
